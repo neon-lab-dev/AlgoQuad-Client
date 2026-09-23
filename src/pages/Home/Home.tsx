@@ -1,7 +1,6 @@
 import React from "react";
 import {
   FiArrowRight,
-  FiChevronDown,
   FiDatabase,
   FiSettings,
   FiCpu,
@@ -29,62 +28,6 @@ import { Link } from "react-router-dom";
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-[#0d0d0d] overflow-x-hidden">
-      {/* Nav */}
-      <nav className="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-[#f4f0e5] transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link to="/">
-              <img src={IMAGES.logo} alt="" className="w-44" />
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <a
-                href="#"
-                className="text-[#4a4a4a] hover:text-[#32AADB] font-medium transition-colors"
-              >
-                About Us
-              </a>
-              <div className="relative group">
-                <button className="flex items-center gap-1 text-[#4a4a4a] hover:text-[#32AADB] font-medium transition-colors">
-                  Solutions <FiChevronDown className="mt-0.5" />
-                </button>
-              </div>
-              <a
-                href="#"
-                className="text-[#4a4a4a] hover:text-[#32AADB] font-medium transition-colors"
-              >
-                Our Partners
-              </a>
-              <a
-                href="#"
-                className="text-[#4a4a4a] hover:text-[#32AADB] font-medium transition-colors"
-              >
-                Our Customers
-              </a>
-              <a
-                href="#"
-                className="text-[#4a4a4a] hover:text-[#32AADB] font-medium transition-colors"
-              >
-                Community
-              </a>
-              <a
-                href="#"
-                className="text-[#4a4a4a] hover:text-[#32AADB] font-medium transition-colors"
-              >
-                Contact Us
-              </a>
-            </div>
-            <div className="hidden md:flex">
-              <a
-                href="tel:+916307907413"
-                className="bg-[#32AADB] hover:bg-[#2a91bb] text-white px-6 py-2.5 rounded-md font-medium transition-all shadow-md hover:shadow-lg"
-              >
-                Connect With Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* --- FANCY HERO SECTION --- */}
       {/* --- FANCY HERO SECTION --- */}
       <style>{`
@@ -225,84 +168,8 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* --- Solutions Section --- */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0d0d0d] mb-4">
-              Our Suite of Solutions
-            </h2>
-            <div className="w-20 h-1 bg-[#32AADB] mx-auto rounded-full mb-6"></div>
-            <p className="text-[#4a4a4a] max-w-2xl mx-auto">
-              Delivering specialized, banking and financial sector-focused
-              services to ensure your operations run seamlessly and securely.
-            </p>
-          </div>
-
-          {/* Changed from Grid to Flexbox for perfect centering of the last item */}
-          <div className="flex flex-wrap justify-center gap-8">
-            {[
-              {
-                icon: <FiMonitor className="w-8 h-8 text-[#32AADB]" />,
-                title: "Application Support & Maintenance",
-                desc: "Comprehensive lifecycle management to keep your critical business applications running smoothly.",
-              },
-              {
-                icon: <FiDatabase className="w-8 h-8 text-[#32AADB]" />,
-                title: "Database Support",
-                desc: "Expert management for Oracle, MySQL, SQL Server, PostgreSQL, and MongoDB environments.",
-              },
-              {
-                icon: <FiSettings className="w-8 h-8 text-[#32AADB]" />,
-                title: "Infrastructure Support Services",
-                desc: "Robust support for Servers, Storage, Networks, and Operating Systems to ensure high availability.",
-              },
-              {
-                icon: <FiCheckCircle className="w-8 h-8 text-[#32AADB]" />,
-                title: "Quality Assurance / Testing",
-                desc: "Rigorous testing frameworks to guarantee software reliability, security, and performance.",
-              },
-              {
-                icon: <FiBriefcase className="w-8 h-8 text-[#32AADB]" />,
-                title: "Business Analysis & Project Management",
-                desc: "Strategic planning and execution to align technology initiatives with your business goals.",
-              },
-              {
-                icon: <FiLayers className="w-8 h-8 text-[#32AADB]" />,
-                title: "Managed Service Support",
-                desc: "End-to-end managed services allowing your internal teams to focus on core business objectives.",
-              },
-              {
-                icon: <FiUsers className="w-8 h-8 text-[#32AADB]" />,
-                title: "Resource Augmentation",
-                desc: "Flexible onsite and offshore staffing solutions to scale your team with top-tier talent.",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                // Added responsive widths to mimic the 3-column grid layout
-                className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] bg-white p-8 rounded-2xl border border-[#f4f0e5] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col"
-              >
-                <div className="mb-6 p-4 bg-[#f8f6f1] rounded-xl inline-block group-hover:bg-[#32AADB]/10 transition-colors w-fit">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg font-bold text-[#0d0d0d] mb-3 leading-tight">
-                  {item.title}
-                </h3>
-                <p className="text-[#4a4a4a] text-sm mb-6 flex-grow">
-                  {item.desc}
-                </p>
-                <button className="text-[#32AADB] font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all mt-auto w-fit">
-                  Learn More <FiArrowRight />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* --- About Section --- */}
-      <section className="py-24 bg-[#f8f6f1]">
+      <section id="about" className="py-24 bg-[#f8f6f1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -374,6 +241,82 @@ const Home: React.FC = () => {
                 </span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- Solutions Section --- */}
+      <section id="services" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#0d0d0d] mb-4">
+              Our Suite of Solutions
+            </h2>
+            <div className="w-20 h-1 bg-[#32AADB] mx-auto rounded-full mb-6"></div>
+            <p className="text-[#4a4a4a] max-w-2xl mx-auto">
+              Delivering specialized, banking and financial sector-focused
+              services to ensure your operations run seamlessly and securely.
+            </p>
+          </div>
+
+          {/* Changed from Grid to Flexbox for perfect centering of the last item */}
+          <div className="flex flex-wrap justify-center gap-8">
+            {[
+              {
+                icon: <FiMonitor className="w-8 h-8 text-[#32AADB]" />,
+                title: "Application Support & Maintenance",
+                desc: "Comprehensive lifecycle management to keep your critical business applications running smoothly.",
+              },
+              {
+                icon: <FiDatabase className="w-8 h-8 text-[#32AADB]" />,
+                title: "Database Support",
+                desc: "Expert management for Oracle, MySQL, SQL Server, PostgreSQL, and MongoDB environments.",
+              },
+              {
+                icon: <FiSettings className="w-8 h-8 text-[#32AADB]" />,
+                title: "Infrastructure Support Services",
+                desc: "Robust support for Servers, Storage, Networks, and Operating Systems to ensure high availability.",
+              },
+              {
+                icon: <FiCheckCircle className="w-8 h-8 text-[#32AADB]" />,
+                title: "Quality Assurance / Testing",
+                desc: "Rigorous testing frameworks to guarantee software reliability, security, and performance.",
+              },
+              {
+                icon: <FiBriefcase className="w-8 h-8 text-[#32AADB]" />,
+                title: "Business Analysis & Project Management",
+                desc: "Strategic planning and execution to align technology initiatives with your business goals.",
+              },
+              {
+                icon: <FiLayers className="w-8 h-8 text-[#32AADB]" />,
+                title: "Managed Service Support",
+                desc: "End-to-end managed services allowing your internal teams to focus on core business objectives.",
+              },
+              {
+                icon: <FiUsers className="w-8 h-8 text-[#32AADB]" />,
+                title: "Resource Augmentation",
+                desc: "Flexible onsite and offshore staffing solutions to scale your team with top-tier talent.",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                // Added responsive widths to mimic the 3-column grid layout
+                className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] bg-white p-8 rounded-2xl border border-[#f4f0e5] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col"
+              >
+                <div className="mb-6 p-4 bg-[#f8f6f1] rounded-xl inline-block group-hover:bg-[#32AADB]/10 transition-colors w-fit">
+                  {item.icon}
+                </div>
+                <h3 className="text-lg font-bold text-[#0d0d0d] mb-3 leading-tight">
+                  {item.title}
+                </h3>
+                <p className="text-[#4a4a4a] text-sm mb-6 flex-grow">
+                  {item.desc}
+                </p>
+                <button className="text-[#32AADB] font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all mt-auto w-fit">
+                  Learn More <FiArrowRight />
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -499,7 +442,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* --- Why Choose Us Section --- */}
-      <section className="py-24 bg-white">
+      <section id="why-us" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#0d0d0d] mb-4">
@@ -617,7 +560,7 @@ const Home: React.FC = () => {
       </section> */}
 
       {/* --- CTA Section --- */}
-      <section className="py-24 bg-white">
+      <section id="contact" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#0d0d0d] rounded-3xl p-12 lg:p-20 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#32AADB]/20 to-transparent"></div>
@@ -629,7 +572,10 @@ const Home: React.FC = () => {
               <p className="text-[#b0b0b0] mb-10 text-lg">
                 Take the Step. Let's Turn Your Business Goals into Reality
               </p>
-              <a href="tel:+916307907413" className="inline-flex items-center gap-2 bg-[#32AADB] hover:bg-[#2a91bb] text-white px-8 py-4 rounded-md font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-lg">
+              <a
+                href="tel:+916307907413"
+                className="inline-flex items-center gap-2 bg-[#32AADB] hover:bg-[#2a91bb] text-white px-8 py-4 rounded-md font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-lg"
+              >
                 Connect with us <FiArrowRight />
               </a>
             </div>
