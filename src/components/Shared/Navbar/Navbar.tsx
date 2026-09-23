@@ -70,7 +70,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {NAV_LINKS.map((link) => {
               const isActive = activeId === link.id;
               return (
@@ -102,7 +102,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex">
+          <div className="hidden lg:flex">
             <a
               href="tel:+916307907413"
               className="bg-[#32AADB] hover:bg-[#2a91bb] text-white px-6 py-2.5 rounded-md font-medium transition-all shadow-md hover:shadow-lg"
@@ -113,7 +113,7 @@ const Navbar = () => {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2 text-[#4a4a4a]"
+            className="lg:hidden p-2 text-[#4a4a4a]"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -123,7 +123,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="md:hidden pb-4 animate-fade-in">
+          <div className="lg:hidden pb-4 animate-fade-in">
             <div className="flex flex-col gap-1 bg-white border border-[#f4f0e5] rounded-xl p-3 shadow-lg">
               {NAV_LINKS.map((link) => {
                 const isActive = activeId === link.id;
