@@ -75,7 +75,7 @@ const Home: React.FC = () => {
             </div>
             <div className="hidden md:flex">
               <a
-                href="#"
+                href="tel:+916307907413"
                 className="bg-[#32AADB] hover:bg-[#2a91bb] text-white px-6 py-2.5 rounded-md font-medium transition-all shadow-md hover:shadow-lg"
               >
                 Connect With Us
@@ -629,9 +629,9 @@ const Home: React.FC = () => {
               <p className="text-[#b0b0b0] mb-10 text-lg">
                 Take the Step. Let's Turn Your Business Goals into Reality
               </p>
-              <button className="inline-flex items-center gap-2 bg-[#32AADB] hover:bg-[#2a91bb] text-white px-8 py-4 rounded-md font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-lg">
+              <a href="tel:+916307907413" className="inline-flex items-center gap-2 bg-[#32AADB] hover:bg-[#2a91bb] text-white px-8 py-4 rounded-md font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-lg">
                 Connect with us <FiArrowRight />
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -767,10 +767,10 @@ const Home: React.FC = () => {
                 <li className="flex items-center gap-3">
                   <FiPhone className="w-5 h-5 text-[#32AADB] flex-shrink-0" />
                   <a
-                    href="tel:+971123456789"
+                    href="tel:+916307907413"
                     className="hover:text-[#32AADB] transition-colors"
                   >
-                    +91 32 345 6789
+                    +91 63079 07413
                   </a>
                 </li>
               </ul>
@@ -786,7 +786,9 @@ const Home: React.FC = () => {
             {/* Social Media Icons Moved Here */}
             <div className="flex gap-4 order-1 md:order-2">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/algoquad-systems-solutions"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white border border-[#f4f0e5] flex items-center justify-center text-[#4a4a4a] hover:bg-[#32AADB] hover:text-white hover:border-[#32AADB] transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 <FiLinkedin className="w-5 h-5" />
