@@ -28,18 +28,18 @@ const Footer = () => {
               <ul className="space-y-3 text-[#4a4a4a] text-sm">
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="hover:text-[#32AADB] transition-colors"
                   >
-                    Our Story
+                   Home
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/career"
                     className="hover:text-[#32AADB] transition-colors"
                   >
-                    Contact Us
+                    Career
                   </a>
                 </li>
               </ul>
