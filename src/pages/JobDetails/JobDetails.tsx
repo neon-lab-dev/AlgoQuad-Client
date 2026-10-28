@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
   FiMapPin, FiArrowLeft, FiBriefcase, FiCheckCircle, 
-  FiStar, FiAward, FiUsers, FiCalendar, FiAlertCircle 
+  FiStar, FiAward, FiUsers, FiCalendar, FiAlertCircle, 
+  FiShare2
 } from 'react-icons/fi';
 import { api } from '../../services/api';
 import ApplyModal from '../../components/JobDetailsPage/ApplyModal/ApplyModal';
@@ -74,6 +75,25 @@ const JobDetails: React.FC = () => {
   const isDeadlinePassed = job.applicationDeadline 
     ? new Date() > new Date(job.applicationDeadline) 
     : false;
+
+      const handleReferOpportunity = () => {
+    if (!job) return;
+    
+    const subject = encodeURIComponent(`Job Opportunity: ${job.title} at AlgoQuad`);
+    const body = encodeURIComponent(
+      `Hi,\n\nI came across this exciting opportunity at AlgoQuad and thought of you.\n\n` +
+      `Role: ${job.title}\n` +
+      `Department: ${job.department}\n` +
+      `Location: ${job.location}\n` +
+      `Employment Type: ${job.employmentType.replace('_', ' ')}\n\n` +
+      `You can view the full details and apply here:\n` +
+      `${window.location.href}\n\n` +
+      `Best regards`
+    );
+
+    // Opens default email client
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  };
 
   return (
     <div className="bg-[#f8f6f1] min-h-screen pb-24 pt-32">
@@ -194,6 +214,13 @@ const JobDetails: React.FC = () => {
                   Apply Now
                 </button>
               )}
+
+              <button
+                onClick={handleReferOpportunity}
+                className="w-full mt-3 bg-transparent border border-gray-600 hover:border-[#32AADB] hover:text-[#32AADB] text-gray-300 py-3 rounded-lg font-semibold transition-all relative z-10 flex items-center justify-center gap-2"
+              >
+                <FiShare2 /> Refer to a connection
+              </button>
             </div>
 
             {/* Skills */}
