@@ -7,8 +7,10 @@ import {
   FiSearch,
   FiBriefcase,
   FiUsers,
+  FiCalendar,
 } from "react-icons/fi";
 import { api } from "../../../services/api";
+import { formatDate } from "../../../utils/formatDate";
 
 // Types based on your backend
 interface Job {
@@ -24,6 +26,7 @@ interface Job {
   responsibilities: string[];
   qualifications: string[];
   perks: string[];
+  applicationDeadline: string;
 }
 
 const AllJobs: React.FC = () => {
@@ -147,78 +150,97 @@ const AllJobs: React.FC = () => {
             {filteredJobs.length > 0 ? (
               filteredJobs.map((job) => (
                 <div
-                  key={job._id}
-                  className="bg-white p-6 rounded-2xl border border-[#f4f0e5] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col h-full cursor-pointer"
-                  onClick={() => navigate(`/career/job/${job._id}`)}
-                >
-                  {/* Card Header */}
-                  <div className="flex items-start justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-[#32AADB]/10 flex items-center justify-center flex-shrink-0">
-                      <FiBriefcase className="w-6 h-6 text-[#32AADB]" />
-                    </div>
-                    <div className="flex flex-col items-end gap-2">
-                      <span className="inline-block px-2.5 py-1 bg-[#32AADB]/10 text-[#32AADB] text-xs font-semibold rounded-md uppercase">
-                        {job.employmentType.replace("_", " ")}
-                      </span>
-                      <span className="text-xs font-medium text-[#949494] flex items-center gap-1">
-                        <FiUsers className="w-3 h-3" /> {job.openings}{" "}
-                        {job.openings === 1 ? "Opening" : "Openings"}
-                      </span>
-                    </div>
-                  </div>
+  key={job._id}
+  className="bg-white p-6 rounded-2xl border border-[#f4f0e5] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col h-full cursor-pointer"
+  onClick={() => navigate(`/career/job/${job._id}`)}
+>
+  {/* Card Header */}
+  <div className="flex items-start justify-between mb-5">
+    <div className="w-12 h-12 rounded-xl bg-[#32AADB]/10 flex items-center justify-center flex-shrink-0">
+      <FiBriefcase className="w-6 h-6 text-[#32AADB]" />
+    </div>
+    <div className="flex flex-col items-end gap-2">
+      <span className="inline-block px-2.5 py-1 bg-[#32AADB]/10 text-[#32AADB] text-xs font-semibold rounded-md uppercase">
+        {job.employmentType.replace("_", " ")}
+      </span>
+      <span className="text-xs font-medium text-[#949494] flex items-center gap-1">
+        <FiUsers className="w-3 h-3" /> {job.openings}{" "}
+        {job.openings === 1 ? "Opening" : "Openings"}
+      </span>
+    </div>
+  </div>
 
-                  {/* Title & Dept */}
-                  <div className="mb-4">
-                    <span className="text-xs font-bold text-[#32AADB] tracking-wider uppercase mb-1 block">
-                      {job.department}
-                    </span>
-                    <h3 className="text-xl font-bold text-[#0d0d0d] group-hover:text-[#32AADB] transition-colors leading-snug">
-                      {job.title}
-                    </h3>
-                  </div>
+  {/* Title & Dept */}
+  <div className="mb-4">
+    <span className="text-xs font-bold text-[#32AADB] tracking-wider uppercase mb-1 block">
+      {job.department}
+    </span>
+    <h3 className="text-xl font-bold text-[#0d0d0d] group-hover:text-[#32AADB] transition-colors leading-snug">
+      {job.title}
+    </h3>
+  </div>
 
-                  {/* Truncated Description */}
-                  <p className="text-[#4a4a4a] text-sm mb-6 flex-grow leading-relaxed line-clamp-3">
-                    {job.description}
-                  </p>
+  {/* Truncated Description */}
+  <p className="text-[#4a4a4a] text-sm mb-6 flex-grow leading-relaxed line-clamp-3">
+    {job.description}
+  </p>
 
-                  {/* Skills Preview */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {job.skills.slice(0, 3).map((skill, i) => (
-                      <span
-                        key={i}
-                        className="text-xs bg-[#f8f6f1] text-[#4a4a4a] px-2 py-1 rounded-md"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                    {job.skills.length > 3 && (
-                      <span className="text-xs bg-[#f8f6f1] text-[#4a4a4a] px-2 py-1 rounded-md">
-                        +{job.skills.length - 3} more
-                      </span>
-                    )}
-                  </div>
+  {/* Skills Preview */}
+  <div className="flex flex-wrap gap-2 mb-6">
+    {job.skills.slice(0, 3).map((skill: string, i: number) => (
+      <span
+        key={i}
+        className="text-xs bg-[#f8f6f1] text-[#4a4a4a] px-2 py-1 rounded-md"
+      >
+        {skill}
+      </span>
+    ))}
+    {job.skills.length > 3 && (
+      <span className="text-xs bg-[#f8f6f1] text-[#4a4a4a] px-2 py-1 rounded-md">
+        +{job.skills.length - 3} more
+      </span>
+    )}
+  </div>
 
-                  {/* Location & Action */}
-                  <div className="pt-4 border-t border-[#f4f0e5] flex items-center justify-between mt-auto">
-                    <div className="flex items-center gap-1.5 text-sm text-[#4a4a4a]">
-                      <FiMapPin className="text-[#32AADB]" /> {job.location}
-                    </div>
+  {/* Footer Section */}
+  <div className="pt-4 border-t border-[#f4f0e5] mt-auto">
+    
+    {/* NEW: Deadline & Location Row */}
+    <div className="flex flex-col gap-2 mb-4">
+      {/* Deadline */}
+      <div className="flex items-center gap-1.5 text-sm text-[#4a4a4a]">
+        <FiCalendar className="text-orange-500 w-4 h-4" />
+        <span>
+          Application Deadline:{" "}
+          <span className="font-semibold text-neutral-10">
+            {formatDate(job.applicationDeadline)}
+          </span>
+        </span>
+      </div>
 
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevent double navigation if clicking button
-                        navigate(`/career/job/${job._id}`);
-                      }}
-                      className="flex items-center gap-2 text-[#0d0d0d] font-semibold text-sm hover:text-[#32AADB] transition-colors group/btn"
-                    >
-                      View Details
-                      <span className="w-8 h-8 rounded-full bg-[#f8f6f1] flex items-center justify-center group-hover/btn:bg-[#32AADB] group-hover/btn:text-white transition-colors">
-                        <FiArrowRight className="w-4 h-4" />
-                      </span>
-                    </button>
-                  </div>
-                </div>
+      {/* Location */}
+      <div className="flex items-center gap-1.5 text-sm text-[#4a4a4a]">
+        <FiMapPin className="text-[#32AADB] w-4 h-4" /> {job.location}
+      </div>
+    </div>
+
+    {/* Action Button */}
+    <div className="flex items-center justify-end">
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent double navigation if clicking button
+          navigate(`/career/job/${job._id}`);
+        }}
+        className="flex items-center gap-2 text-[#0d0d0d] font-semibold text-sm hover:text-[#32AADB] transition-colors group/btn"
+      >
+        View Details
+        <span className="w-8 h-8 rounded-full bg-[#f8f6f1] flex items-center justify-center group-hover/btn:bg-[#32AADB] group-hover/btn:text-white transition-colors">
+          <FiArrowRight className="w-4 h-4" />
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
               ))
             ) : (
               <div className="col-span-full text-center py-24 bg-white rounded-2xl border border-[#f4f0e5]">

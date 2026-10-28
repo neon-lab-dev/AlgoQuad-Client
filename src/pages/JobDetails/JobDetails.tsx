@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
   FiMapPin, FiArrowLeft, FiBriefcase, FiCheckCircle, 
-  FiStar, FiAward, FiUsers
+  FiStar, FiAward, FiUsers, FiCalendar, FiAlertCircle 
 } from 'react-icons/fi';
 import { api } from '../../services/api';
 import ApplyModal from '../../components/JobDetailsPage/ApplyModal/ApplyModal';
+import { formatDate } from '../../utils/formatDate'; // Adjust import path if needed
 
 interface Job {
   _id: string;
@@ -20,6 +21,7 @@ interface Job {
   responsibilities: string[];
   qualifications: string[];
   perks: string[];
+  applicationDeadline?: string; // <-- Added deadline
 }
 
 const JobDetails: React.FC = () => {
@@ -68,6 +70,11 @@ const JobDetails: React.FC = () => {
     );
   }
 
+  // ---- Deadline Logic ----
+  const isDeadlinePassed = job.applicationDeadline 
+    ? new Date() > new Date(job.applicationDeadline) 
+    : false;
+
   return (
     <div className="bg-[#f8f6f1] min-h-screen pb-24 pt-32">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,6 +111,18 @@ const JobDetails: React.FC = () => {
                 <div className="flex items-center gap-1.5 bg-[#f8f6f1] px-3 py-1.5 rounded-lg">
                   <FiUsers className="text-[#32AADB]" /> {job.openings} {job.openings === 1 ? 'Opening' : 'Openings'}
                 </div>
+                
+                {/* NEW: Deadline Tag */}
+                {job.applicationDeadline && (
+                  <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium ${
+                    isDeadlinePassed 
+                      ? "bg-red-50 text-red-600 border border-red-100" 
+                      : "bg-orange-50 text-orange-600 border border-orange-100"
+                  }`}>
+                    <FiCalendar /> 
+                    {isDeadlinePassed ? "Deadline Passed" : `Application Deadline: ${formatDate(job.applicationDeadline)}`}
+                  </div>
+                )}
               </div>
 
               <div className="prose max-w-none text-[#4a4a4a]">
@@ -149,14 +168,32 @@ const JobDetails: React.FC = () => {
             {/* Apply Box */}
             <div className="bg-[#0d0d0d] p-8 rounded-3xl shadow-xl text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#32AADB] rounded-full blur-[80px] opacity-30 -translate-y-1/2 translate-x-1/2"></div>
-              <h3 className="text-xl font-bold text-white mb-2 relative z-10">Interested in this role?</h3>
-              <p className="text-gray-400 text-sm mb-6 relative z-10">Take the next step in your career with AlgoQuad.</p>
-              <button 
-                onClick={() => setIsApplyModalOpen(true)}
-                className="w-full bg-[#32AADB] hover:bg-[#2a91bb] text-white py-3 rounded-lg font-semibold transition-all relative z-10"
-              >
-                Apply Now
-              </button>
+              
+              <h3 className="text-xl font-bold text-white mb-2 relative z-10">
+                {isDeadlinePassed ? "Applications Closed" : "Interested in this role?"}
+              </h3>
+              
+              <p className="text-gray-400 text-sm mb-6 relative z-10">
+                {isDeadlinePassed 
+                  ? "The application deadline for this position has passed." 
+                  : "Take the next step in your career with AlgoQuad."}
+              </p>
+
+              {isDeadlinePassed ? (
+                <button 
+                  disabled
+                  className="w-full bg-gray-700 text-gray-400 py-3 rounded-lg font-semibold cursor-not-allowed flex items-center justify-center gap-2 relative z-10"
+                >
+                  <FiAlertCircle /> Applications Closed
+                </button>
+              ) : (
+                <button 
+                  onClick={() => setIsApplyModalOpen(true)}
+                  className="w-full bg-[#32AADB] hover:bg-[#2a91bb] text-white py-3 rounded-lg font-semibold transition-all relative z-10"
+                >
+                  Apply Now
+                </button>
+              )}
             </div>
 
             {/* Skills */}
@@ -192,13 +229,15 @@ const JobDetails: React.FC = () => {
         </div>
       </div>
 
-      {/* Render the Modal */}
-      <ApplyModal
-        isOpen={isApplyModalOpen} 
-        onClose={() => setIsApplyModalOpen(false)} 
-        jobId={job._id}
-        jobTitle={job.title}
-      />
+      {/* Render the Modal (Only renders if not passed) */}
+      {!isDeadlinePassed && (
+        <ApplyModal
+          isOpen={isApplyModalOpen} 
+          onClose={() => setIsApplyModalOpen(false)} 
+          jobId={job._id}
+          jobTitle={job.title}
+        />
+      )}
     </div>
   );
 };
