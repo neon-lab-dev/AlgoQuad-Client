@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { 
   FiMapPin, FiArrowLeft, FiBriefcase, FiCheckCircle, 
   FiStar, FiAward, FiUsers, FiCalendar, FiAlertCircle, 
@@ -27,6 +27,8 @@ interface Job {
 
 const JobDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+   const [searchParams] = useSearchParams();
+  const referrer = searchParams.get("referrer");
   const navigate = useNavigate();
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
@@ -263,6 +265,7 @@ const JobDetails: React.FC = () => {
           onClose={() => setIsApplyModalOpen(false)} 
           jobId={job._id}
           jobTitle={job.title}
+          referrer={referrer || ''}
         />
       )}
     </div>

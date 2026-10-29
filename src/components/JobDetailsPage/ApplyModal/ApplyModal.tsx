@@ -8,9 +8,10 @@ interface ApplyModalProps {
   onClose: () => void;
   jobId: string;
   jobTitle: string;
+  referrer: string;
 }
 
-const ApplyModal: React.FC<ApplyModalProps> = ({ isOpen, onClose, jobId, jobTitle }) => {
+const ApplyModal: React.FC<ApplyModalProps> = ({ isOpen, onClose, jobId, jobTitle, referrer }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -86,6 +87,7 @@ const ApplyModal: React.FC<ApplyModalProps> = ({ isOpen, onClose, jobId, jobTitl
       formDataPayload.append('phoneNumber', formData.phoneNumber);
       formDataPayload.append('experience', formData.experience);
       formDataPayload.append('jobId', jobId);
+      formDataPayload.append('referrer', referrer);
       
       // Append the file! (Assuming your backend expects "resume")
       // If your backend expects "file", change this key to "file"
