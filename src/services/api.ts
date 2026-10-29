@@ -4,7 +4,7 @@ import axios from 'axios';
 // https://algoquad-server.vercel.app
 
 export const api = axios.create({
-  baseURL: 'https://algoquad-server.vercel.app/api/v1',
+  baseURL: 'https://algoquad-server.onrender.com/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
