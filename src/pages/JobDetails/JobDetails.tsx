@@ -41,7 +41,7 @@ const JobDetails: React.FC = () => {
     const fetchJobDetails = async () => {
       try {
         setLoading(true);
-        const response = await api.get(`/job/${id}`);
+        const response = await api.get(`/job/custom/${id}`);
         setJob(response.data.data || response.data);
       } catch (err) {
         console.error("Error fetching job details:", err);
