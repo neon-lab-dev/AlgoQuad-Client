@@ -150,7 +150,7 @@ const AllJobs: React.FC = () => {
                 <div
                   key={job._id}
                   className="bg-white p-6 rounded-2xl border border-[#f4f0e5] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col h-full cursor-pointer"
-                  onClick={() => navigate(`/career/job/${job._id}`)}
+                  onClick={() => navigate(`/career/job/${job.jobId}`)}
                 >
                   {/* Card Header */}
                   <div className="flex items-start justify-between mb-5">
